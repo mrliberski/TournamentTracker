@@ -19,7 +19,7 @@ namespace TrackerLibrary
         /// <summary>
         /// 
         /// </summary>
-        public string PlaceName { get; set; }
+        public string? PlaceName { get; set; }
 
         /// <summary>
         /// 

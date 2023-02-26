@@ -14,7 +14,7 @@ namespace TrackerLibrary
         /// <summary>
         /// 
         /// </summary>
-        public string TournamentName { get; set; }
+        public string? TournamentName { get; set; }
 
         /// <summary>
         /// 

@@ -19,7 +19,7 @@ namespace TrackerLibrary
         /// <summary>
         /// The unique name of a team 
         /// </summary>
-        public string TeamName { get; set; }
+        public string? TeamName { get; set; }
 
     }
 }

@@ -20,7 +20,7 @@ namespace TrackerLibrary
         /// <summary>
         /// The winner of the match
         /// </summary>
-        public TeamModel Winner { get; set; }
+        public TeamModel? Winner { get; set; }
 
         /// <summary>
         /// Which round this match is a part of
