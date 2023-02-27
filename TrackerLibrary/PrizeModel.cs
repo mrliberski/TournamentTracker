@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TrackerLibrary
 {
     /// <summary>
-    /// 
+    /// Defines the prize for winnign a tournament
     /// </summary>
     public class PrizeModel
     {

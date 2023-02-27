@@ -12,13 +12,12 @@ namespace TrackerLibrary
     public class TournamentModel
     {
         /// <summary>
-        /// 
+        /// Unique name for a single tournament
         /// </summary>
         public string? TournamentName { get; set; }
 
         /// <summary>
-        /// 
-        /// 
+        /// Defines an entry fee for the tournament
         /// </summary>
         public decimal EntryFee { get; set; }
 
