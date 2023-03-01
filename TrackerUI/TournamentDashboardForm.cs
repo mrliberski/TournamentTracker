@@ -16,5 +16,10 @@ namespace TrackerUI
         {
             InitializeComponent();
         }
+
+        private void loadExistingTournamentDropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
