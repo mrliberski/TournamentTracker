@@ -12,7 +12,6 @@ namespace TrackerLibrary
 
         public static void InitializeConnections(bool database, bool textFiles)
         {
-            Connections.Clear();
             if (database)
             {
                 // TODO - set up the SQL connector

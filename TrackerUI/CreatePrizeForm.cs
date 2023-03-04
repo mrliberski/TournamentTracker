@@ -30,13 +30,17 @@ namespace TrackerUI
             }
         }
 
+        // Form validation block 
         private bool ValidateForm() 
         {
+            // TODO - think of how to communicate errors back to user
+            // set output to true and if if fails along the way it will be reset to false
             bool output = true;
+
+            // Parse place number to int
             int placeNumber = 0;
-
             bool placeNumberValidNumber = (int.TryParse(placeNameValue.Text, out placeNumber));
-
+            // Check if this succeded
             if (!placeNumberValidNumber)
             {
                 output = false;
