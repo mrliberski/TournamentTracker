@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrackerLibrary;
+using TrackerLibrary.DataAccess;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
@@ -23,15 +25,31 @@ namespace TrackerUI
             if (ValidateForm())
             {
                 PrizeModel model = new PrizeModel(
-                    placeNameValue.Text, 
-                    placeNumberValue.Text, 
-                    prizeAmountValue.Text, 
+                    placeNameValue.Text,
+                    placeNumberValue.Text,
+                    prizeAmountValue.Text,
                     prizePercentageValue.Text);
+
+                // Save data 
+                foreach (IDataConnection db in GlobalConfig.Connections)
+                {
+                    db.CreatePrize(model);
+                }
+
+                // Clear form
+                placeNameValue.Text = "";
+                placeNumberValue.Text = "";
+                prizeAmountValue.Text = "0";
+                prizePercentageValue.Text = "0";
+            }
+            else
+            {
+                MessageBox.Show("This form has invalid information :(", "Please check information...", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
         // Form validation block 
-        private bool ValidateForm() 
+        private bool ValidateForm()
         {
             // TODO - think of how to communicate errors back to user
             // set output to true and if if fails along the way it will be reset to false
@@ -39,9 +57,9 @@ namespace TrackerUI
 
             // Parse place number to int
             int placeNumber = 0;
-            bool placeNumberValidNumber = (int.TryParse(placeNameValue.Text, out placeNumber));
+            bool placeNumberValidNumber = (int.TryParse(placeNumberValue.Text, out placeNumber));
             // Check if this succeded
-            if (!placeNumberValidNumber)
+            if (placeNumberValidNumber == false)
             {
                 output = false;
             }
@@ -52,7 +70,7 @@ namespace TrackerUI
             }
 
             if (placeNameValue.Text.Length == 0)
-            {           
+            {
                 output = false;
             }
 
@@ -72,7 +90,7 @@ namespace TrackerUI
                 output = false;
             }
 
-            if (prizePercentage <0 || prizePercentage > 100)
+            if (prizePercentage < 0 || prizePercentage > 100)
             {
                 output = false;
             }

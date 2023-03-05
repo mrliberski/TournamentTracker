@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.Models
 {
     /// <summary>
     /// Represents one team in a matchup
@@ -19,7 +19,7 @@ namespace TrackerLibrary
         /// <summary>
         /// Represents the score for this particular team 
         /// </summary>
-        public double Score  { get; set; }
+        public double Score { get; set; }
 
         /// <summary>
         /// Represents the matchup that this team came from as the winner

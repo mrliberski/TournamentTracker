@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TrackerLibrary.Models;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.DataAccess
 {
-    public class SqlConnector : IDataConnection
+    public class TextConnector : IDataConnection
     {
-        // TODO - Make the CretePrize actually save to th edatabase
+
+        // TODO - Make the CretePrize actually save to file
         /// <summary>
         /// Saves a new prize to the database
         /// </summary>

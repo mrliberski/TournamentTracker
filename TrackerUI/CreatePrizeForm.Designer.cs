@@ -102,6 +102,7 @@
             prizeAmountValue.Name = "prizeAmountValue";
             prizeAmountValue.Size = new Size(222, 43);
             prizeAmountValue.TabIndex = 16;
+            prizeAmountValue.Text = "0";
             // 
             // prizeAmountLabel
             // 
@@ -122,6 +123,7 @@
             prizePercentageValue.Name = "prizePercentageValue";
             prizePercentageValue.Size = new Size(222, 43);
             prizePercentageValue.TabIndex = 18;
+            prizePercentageValue.Text = "0";
             // 
             // prizePertcentageLabel
             // 

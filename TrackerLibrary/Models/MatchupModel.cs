@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.Models
 {
     /// <summary>
     /// Represents one match in a tournament
@@ -15,7 +15,7 @@ namespace TrackerLibrary
         /// <summary>
         /// The set of teams that were involved in a tournament
         /// </summary>
-        public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel> ();
+        public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel>();
 
         /// <summary>
         /// The winner of the match
@@ -25,6 +25,6 @@ namespace TrackerLibrary
         /// <summary>
         /// Which round this match is a part of
         /// </summary>
-        public int MatchupRound { get; set; }    
+        public int MatchupRound { get; set; }
     }
 }

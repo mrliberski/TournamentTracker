@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.Models
 {
     /// <summary>
     /// Represent one person
@@ -24,7 +24,7 @@ namespace TrackerLibrary
         /// <summary>
         /// The primary email address of the person
         /// </summary>
-        public string? EmailAddress  { get; set; }
+        public string? EmailAddress { get; set; }
 
         /// <summary>
         /// The primary cell phone number of a person

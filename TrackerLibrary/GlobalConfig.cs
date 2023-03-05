@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
+using TrackerLibrary.DataAccess;
 
 namespace TrackerLibrary
 {
@@ -22,10 +19,15 @@ namespace TrackerLibrary
             if (textFiles)
             {
                 // TODO - if textfile
-                TextConnection text = new();
+                TextConnector text = new();
                 Connections.Add(text);
 
             }
+        }
+
+        public static string CnnSting(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
     }
