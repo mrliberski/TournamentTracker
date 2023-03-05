@@ -31,10 +31,7 @@ namespace TrackerUI
                     prizePercentageValue.Text);
 
                 // Save data 
-                foreach (IDataConnection db in GlobalConfig.Connections)
-                {
-                    db.CreatePrize(model);
-                }
+                GlobalConfig.Connection.CreatePrize(model);
 
                 // Clear form
                 placeNameValue.Text = "";
