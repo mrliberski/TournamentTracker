@@ -33,8 +33,10 @@ namespace TrackerLibrary.DataAccess
                 connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
+                //model.Id = connection.QuerySingle<int>("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
 
                 return model;
+                // gp back yo 6:31
             }
         }
     }
