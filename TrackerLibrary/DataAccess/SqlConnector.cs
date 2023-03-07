@@ -2,12 +2,6 @@
 using System.Data;
 using TrackerLibrary.Models;
 
-//@PlaceNumber int,
-//@PlaceName nvarchar(50), 
-//	@PrizeAmount money,
-//    @Percentage float,
-//    @id int = 0 output
-
 namespace TrackerLibrary.DataAccess
 {
     public class SqlConnector : IDataConnection
@@ -31,6 +25,27 @@ namespace TrackerLibrary.DataAccess
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
+
+                model.Id = p.Get<int>("@id");
+                //model.Id = connection.QuerySingle<int>("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
+
+                return model;
+            }
+        }
+
+        public PersonModel CreatePerson(PersonModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting("Tournaments")))
+            {
+                //do stuff
+                var p = new DynamicParameters();
+                p.Add("@FirstName", model.FirstName);
+                p.Add("@LastName", model.LastName);
+                p.Add("@EmailAddress", model.EmailAddress);
+                p.Add("@CellPhoneNumber", model.CellPhoneNumber);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spPeople_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
                 //model.Id = connection.QuerySingle<int>("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
