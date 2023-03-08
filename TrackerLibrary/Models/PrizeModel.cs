@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TrackerLibrary.Models
+﻿namespace TrackerLibrary.Models
 {
-    /// <summary>
+    /// <summary>Defines the prize for winnign a tournament
     /// Defines the prize for winnign a tournament
     /// </summary>
     public class PrizeModel
@@ -15,6 +9,7 @@ namespace TrackerLibrary.Models
         /// id of the entry in database
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// PLace number like 1, 2, 3
         /// </summary>
@@ -35,15 +30,26 @@ namespace TrackerLibrary.Models
         /// </summary>
         public double PrizePercentage { get; set; }
 
+        /// <summary>
+        /// Default struct
+        /// </summary>
         public PrizeModel()
         {
 
         }
 
+        /// <summary>
+        /// Struct which will handle parsing of string values forom the form and will transform into relevant data types
+        /// </summary>
+        /// <param name="placeName"></param>
+        /// <param name="placeNumber"></param>
+        /// <param name="prizeAmount"></param>
+        /// <param name="prizePercentage"></param>
         public PrizeModel(string placeName, string placeNumber, string prizeAmount, string prizePercentage)
         {
             PlaceName = placeName;
 
+            // intellisense says assignment is unnecessary but i believe it is required so I am choosing to ignore it
             int placeNumberValue = 0;
             int.TryParse(placeNumber, out placeNumberValue);
             PlaceNumber = placeNumberValue;

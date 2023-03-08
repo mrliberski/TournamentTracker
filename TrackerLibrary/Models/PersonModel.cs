@@ -35,5 +35,15 @@ namespace TrackerLibrary.Models
         /// </summary>
         public string? CellPhoneNumber { get; set; }
 
+        /// <summary>
+        /// returns surname
+        /// </summary>
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

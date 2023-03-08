@@ -14,11 +14,48 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        private List<PersonModel> availableTeamMembers = new List<PersonModel>();
+        private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
+
         public CreateTeamForm()
         {
             InitializeComponent();
+
+            // Adding sample data - to be removed later when not needed
+            // CreateSampleData();
+
+            // Call wire up method
+            WireUpLists();
         }
 
+        /// <summary>
+        /// just fake data for testing
+        /// </summary>
+        private void CreateSampleData() 
+        {
+            availableTeamMembers.Add(new PersonModel { FirstName="Pawel" , LastName = "Liberski" });
+            availableTeamMembers.Add(new PersonModel { FirstName = "Malgosia", LastName = "Liberski" });
+
+            selectedTeamMembers.Add(new PersonModel { FirstName = "Anthony", LastName = "Liberski" });
+            selectedTeamMembers.Add(new PersonModel { FirstName = "Emily", LastName = "Liberski" });
+        }
+
+        /// <summary>
+        /// populating drop down and list
+        /// </summary>
+        private void WireUpLists()
+        {
+            selectTeamMemberDropdown.DataSource = availableTeamMembers;
+            selectTeamMemberDropdown.DisplayMember = "FullName";
+
+            teamMembersListbox.DataSource = selectedTeamMembers;
+            teamMembersListbox.DisplayMember = "FullName";
+        }
+
+        // Create Member button click event
         private void createMemberButton_Click(object sender, EventArgs e)
         {
             if (ValidateForm())
@@ -43,6 +80,10 @@ namespace TrackerUI
             }
         }
 
+        /// <summary>
+        /// Validation of entries (could add more steps but perhaps at some later time)
+        /// </summary>
+        /// <returns>bool output - telling whether validation is successfull</returns>
         private bool ValidateForm()
         {
             bool output = true;
