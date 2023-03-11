@@ -31,7 +31,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return File.ReadAllLines(file).ToList();
         }
 
-        // 2. convert text to a alist of prizemodel
+        // 2. convert text from csv.file to a list of prizemodel
         public static List<PrizeModel> ConvertToPrizeModels(this List<string> lines)
         {
             List<PrizeModel> output = new List<PrizeModel>();
@@ -52,6 +52,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
         }
 
+        // 2. convert text from csv.file to a list of personmodel
         public static List<PersonModel> ConvertToPersonModels (this List<string> lines)
         {
             List<PersonModel> output = new List<PersonModel>();
@@ -76,7 +77,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
         // 3. find id
         // 4. add new record with new id (max +1)
 
-        // 5. convert prixes to a list of string
+        // 5. convert prices to a list of string
         public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -96,7 +97,7 @@ namespace TrackerLibrary.DataAccess.TextHelpers
 
             foreach (PersonModel p in models)
             {
-                lines.Add($"{p.Id}, {p.FirstName},{p.LastName},{p.EmailAddress},{p.CellPhoneNumber}");
+                lines.Add($"{p.Id},{p.FirstName},{p.LastName},{p.EmailAddress},{p.CellPhoneNumber}");
             }
 
             File.WriteAllLines (fileName.FullFilePath(), lines);

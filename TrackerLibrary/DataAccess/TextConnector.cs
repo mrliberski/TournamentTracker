@@ -14,7 +14,7 @@ namespace TrackerLibrary.DataAccess
             List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
 
             int currentId = 1;
-            if (people.Count >0)
+            if (people.Count > 0)
             {
                 currentId = people.OrderByDescending(p => p.Id).First().Id + 1;
             }
@@ -57,6 +57,11 @@ namespace TrackerLibrary.DataAccess
             prizes.SaveToPrizeFile(PrizesFile);
 
             return model;
+        }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
     }
 }

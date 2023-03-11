@@ -1,11 +1,14 @@
 ﻿using Dapper;
 using System.Data;
+using System.Threading.Tasks.Dataflow;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary.DataAccess
 {
     public class SqlConnector : IDataConnection
     {
+        //database name
+        private const string db = "Tournaments";
         // TODO - Make the CretePrize actually save to th edatabase
         /// <summary>
         /// Saves a new prize to the database
@@ -35,7 +38,7 @@ namespace TrackerLibrary.DataAccess
 
         public PersonModel CreatePerson(PersonModel model)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting("Tournaments")))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting(db)))
             {
                 //do stuff
                 var p = new DynamicParameters();
@@ -56,10 +59,14 @@ namespace TrackerLibrary.DataAccess
 
         public List<PersonModel> GetPerson_All()
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting("Tournaments")))
-            {
+            List<PersonModel> output;
 
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting(db)))
+            {
+                output = connection.Query<PersonModel>("dbo.spPeople_GetAll").ToList();
             }
+
+            return output;
         }
     }
 }
