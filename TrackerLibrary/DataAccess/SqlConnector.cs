@@ -8,8 +8,9 @@ namespace TrackerLibrary.DataAccess
     public class SqlConnector : IDataConnection
     {
         //database name
+        // TODO - name of db must be moved to config file, outside of hard code
         private const string db = "Tournaments";
-        // TODO - Make the CretePrize actually save to th edatabase
+
         /// <summary>
         /// Saves a new prize to the database
         /// </summary>
@@ -67,6 +68,25 @@ namespace TrackerLibrary.DataAccess
             }
 
             return output;
+        }
+
+        public TeamModel CreateTeam(TeamModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting("Tournaments")))
+            {
+                // will create insert into db
+                var p = new DynamicParameters();
+                p.Add("@TeamName", model.TeamName);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spTeams_Insert", p, commandType: CommandType.StoredProcedure);
+
+                model.Id = p.Get<int>("@id");
+
+
+
+                return model;
+            }
         }
     }
 }

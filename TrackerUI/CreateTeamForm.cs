@@ -72,7 +72,7 @@ namespace TrackerUI
                 p.LastName = lastNameValue.Text;
                 p.EmailAddress = emailValue.Text;
                 p.CellPhoneNumber = cellPhoneValue.Text;
-              
+
                 p = GlobalConfig.Connection.CreatePerson(p);
 
                 selectedTeamMembers.Add(p);
@@ -125,7 +125,7 @@ namespace TrackerUI
             {
                 availableTeamMembers.Remove(p);
                 selectedTeamMembers.Add(p);
-                WireUpLists(); 
+                WireUpLists();
             }
         }
 
@@ -137,8 +137,14 @@ namespace TrackerUI
             {
                 selectedTeamMembers.Remove(p);
                 availableTeamMembers.Add(p);
-                WireUpLists(); 
+                WireUpLists();
             }
+        }
+
+        private void createTeamButton_Click(object sender, EventArgs e)
+        {
+            // validate team name value
+
         }
     }
 }
