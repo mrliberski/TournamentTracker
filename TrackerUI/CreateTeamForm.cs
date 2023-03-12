@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -62,7 +63,7 @@ namespace TrackerUI
         }
 
         // Create Member button click event
-        private void createMemberButton_Click(object sender, EventArgs e)
+        private void CreateMemberButton_Click(object sender, EventArgs e)
         {
             if (ValidateForm())
             {
@@ -113,7 +114,7 @@ namespace TrackerUI
             return output;
         }
 
-        private void addMemberButton_Click(object sender, EventArgs e)
+        private void AddMemberButton_Click(object sender, EventArgs e)
         {
             // remove person from available team members list
             // add person to available team members list
@@ -129,7 +130,7 @@ namespace TrackerUI
             }
         }
 
-        private void removeSelectedMemberButton_Click(object sender, EventArgs e)
+        private void RemoveSelectedMemberButton_Click(object sender, EventArgs e)
         {
             PersonModel p = (PersonModel)teamMembersListbox.SelectedItem;
 
@@ -141,10 +142,26 @@ namespace TrackerUI
             }
         }
 
-        private void createTeamButton_Click(object sender, EventArgs e)
+        private void CreateTeamButton_Click(object sender, EventArgs e)
         {
-            // validate team name value
 
+            if (!string.IsNullOrEmpty(teamNameValue.Text))
+            {
+                TeamModel t = new TeamModel();
+
+                t.TeamName = teamNameValue.Text;
+                t.TeamMembers = selectedTeamMembers;
+
+                t = GlobalConfig.Connection.CreateTeam(t);
+
+                // TODO - if we aren't closing this form after creation - reset the form
+
+                MessageBox.Show("Team was created", "noice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
+            } else
+            {
+                MessageBox.Show("You must enter team name to proceed!", "Please enter team name!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
         }
     }
 }

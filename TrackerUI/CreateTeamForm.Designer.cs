@@ -117,7 +117,7 @@
             addMemberButton.TabIndex = 25;
             addMemberButton.Text = "Add Member";
             addMemberButton.UseVisualStyleBackColor = true;
-            addMemberButton.Click += addMemberButton_Click;
+            addMemberButton.Click += AddMemberButton_Click;
             // 
             // addNewMemberBox
             // 
@@ -153,7 +153,7 @@
             createMemberButton.TabIndex = 27;
             createMemberButton.Text = "Create Member";
             createMemberButton.UseVisualStyleBackColor = true;
-            createMemberButton.Click += createMemberButton_Click;
+            createMemberButton.Click += CreateMemberButton_Click;
             // 
             // cellPhoneValue
             // 
@@ -253,7 +253,7 @@
             removeSelectedMemberButton.TabIndex = 28;
             removeSelectedMemberButton.Text = "Remove Selected";
             removeSelectedMemberButton.UseVisualStyleBackColor = true;
-            removeSelectedMemberButton.Click += removeSelectedMemberButton_Click;
+            removeSelectedMemberButton.Click += RemoveSelectedMemberButton_Click;
             // 
             // createTeamButton
             // 
@@ -270,7 +270,7 @@
             createTeamButton.TabIndex = 29;
             createTeamButton.Text = "Create Team";
             createTeamButton.UseVisualStyleBackColor = true;
-            createTeamButton.Click += createTeamButton_Click;
+            createTeamButton.Click += CreateTeamButton_Click;
             // 
             // CreateTeamForm
             // 

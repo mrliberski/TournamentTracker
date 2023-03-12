@@ -74,7 +74,7 @@ namespace TrackerLibrary.DataAccess
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting("Tournaments")))
             {
-                // will create insert into db
+                // will create insert into Teams db
                 var p = new DynamicParameters();
                 p.Add("@TeamName", model.TeamName);
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -83,7 +83,15 @@ namespace TrackerLibrary.DataAccess
 
                 model.Id = p.Get<int>("@id");
 
+                //create another insert into Team Members db
+                foreach (PersonModel tm in model.TeamMembers)
+                {
+                    p = new DynamicParameters();
+                    p.Add("@TeamId", model.Id);
+                    p.Add("@PersonId", tm.Id);
 
+                    connection.Execute("dbo.spTeamMembersInsert", p, commandType: CommandType.StoredProcedure);
+                }
 
                 return model;
             }
