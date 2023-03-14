@@ -14,7 +14,8 @@ namespace TrackerUI
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            // Initialize th edatabase connections
+            
+            // Initialize the database connections
             //TrackerLibrary.GlobalConfig.InitializeConnections(DatabaseType.Sql);
             TrackerLibrary.GlobalConfig.InitializeConnections(DatabaseType.TextFile);
 
@@ -25,3 +26,5 @@ namespace TrackerUI
         }
     }
 }
+
+//Resume on 10:01:06

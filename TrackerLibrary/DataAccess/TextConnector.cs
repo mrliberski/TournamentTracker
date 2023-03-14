@@ -6,8 +6,10 @@ namespace TrackerLibrary.DataAccess
 {
     public class TextConnector : IDataConnection
     {
+        // filenames we'll be sevaing stuff into
         private const string PrizesFile = "PrizeModels.csv"; //private const - value will never chnage
         private const string PeopleFile = "PersonModels.csv";
+        private const string TeamFile = "TeamModels.csv";
 
         public PersonModel CreatePerson(PersonModel model)
         {
@@ -61,7 +63,25 @@ namespace TrackerLibrary.DataAccess
 
         public TeamModel CreateTeam(TeamModel model)
         {
-            throw new NotImplementedException();
+            // Load file and convert it to model
+            List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
+
+            // find id
+            int currentId = 1;
+
+            if (teams.Count > 0)
+            {
+                currentId = teams.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+
+            teams.Add(model);
+
+            teams.SaveToTeamFile(TeamFile);
+
+            return model;
+
         }
 
         public List<PersonModel> GetPerson_All()
@@ -70,6 +90,3 @@ namespace TrackerLibrary.DataAccess
         }
     }
 }
-
-
-// TODO - resume @ 09:32 :)

@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data.Common;
 using TrackerLibrary.Models;
 
 // *load text file
@@ -103,7 +104,80 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             File.WriteAllLines (fileName.FullFilePath(), lines);
         }
 
+        public static List<TeamModel>ConvertToTeamModels(this List<string> lines, string peopleFileName)
+        {
+            //id, teamname, list of id separated by pipe
+            // 3, Tim's Team, 1|3|4
+
+            List<TeamModel>output = new List<TeamModel>();
+            List<PersonModel> people = peopleFileName.FullFilePath().LoadFile().ConvertToPersonModels();
+
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(',');
+
+                TeamModel team = new TeamModel();
+                team.Id = int.Parse(cols[0]);
+                team.TeamName = cols[1];
+
+                //spliting by pipe
+                string[] personIds = cols[2].Split('|');
+
+                foreach (string id in personIds)
+                {
+                    // take list people in txtt file and filter where id of person is the one passed in; find first id (only one anyway)
+                    // will crash on First() method if list is empty 
+                    team.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First() );
+                }
+
+            }
+
+            return output;
+
+        }
 
 
+        /// <summary>
+        /// Saves Team to team file
+        /// </summary>
+        /// <param name="models"></param>
+        /// <param name="fileName"></param>
+        public static void SaveToTeamFile(this List<TeamModel> models, string fileName)
+        {
+            List<string> lines =new List<string>();
+
+            foreach(TeamModel model in models)
+            {
+                lines.Add($"{ model.Id },{model.TeamName },{ ConvertPeopleListToString(model.TeamMembers) }");
+                File.WriteAllLines(fileName.FullFilePath(), lines);
+            }
+        }
+
+        /// <summary>
+        /// Helper method for the method SavetoTeamFile
+        /// </summary>
+        /// <param name="people"></param>
+        /// <returns>changes list of list of personModel into single string</returns>
+        private static string ConvertPeopleListToString(List<PersonModel> people)
+        {
+            string output = string.Empty;
+
+            
+            if (people.Count ==0)
+            {
+                // if list of people is empty, program will crash hence escape
+                return "";
+            }
+
+            foreach (PersonModel person in people)
+            {
+                // below will retur string with pipe at the end so we will remove it after looping
+                output += $"{person.Id}|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+            return output;
+
+        }
     }
 }
