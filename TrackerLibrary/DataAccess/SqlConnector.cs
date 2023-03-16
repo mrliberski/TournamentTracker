@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Data;
+using System.Reflection;
 using System.Threading.Tasks.Dataflow;
 using TrackerLibrary.Models;
 
@@ -95,6 +96,28 @@ namespace TrackerLibrary.DataAccess
 
                 return model;
             }
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            List<TeamModel> output;
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnSting(db)))
+            {
+                // Pull out the list of teams
+                output = connection.Query<TeamModel>("dbo.spTeam_GetAll").ToList();
+                // for each team we need to pull a list of team members
+                foreach (TeamModel team in output)
+                {
+                    //supply id for sql query
+                    var p = new DynamicParameters();
+                    p.Add("@TeamId", team.Id);
+                    // loop through
+                    team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", p, commandType: CommandType.StoredProcedure).ToList();
+                }
+            }
+
+            return output;
         }
     }
 }

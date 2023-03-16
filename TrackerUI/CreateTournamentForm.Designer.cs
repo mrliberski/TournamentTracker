@@ -296,6 +296,11 @@
 
         }
 
+        private void PlaceNumberLabel_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private Label CreateTournamentLabel;

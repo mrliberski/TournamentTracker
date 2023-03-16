@@ -15,6 +15,7 @@ namespace TrackerLibrary.Models
         /// Id of the record we eill be getting from db
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// The list of members of a team 
         /// </summary>
