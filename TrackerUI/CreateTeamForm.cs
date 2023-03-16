@@ -20,10 +20,13 @@ namespace TrackerUI
         /// </summary>
         private readonly List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private readonly List<PersonModel> selectedTeamMembers = new List<PersonModel>();
+        private ITeamRequester callingForm;
 
-        public CreateTeamForm()
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
 
             // Adding sample data - to be removed later when not needed
             // CreateSampleData();
@@ -152,13 +155,15 @@ namespace TrackerUI
                 t.TeamName = teamNameValue.Text;
                 t.TeamMembers = selectedTeamMembers;
 
-                t = GlobalConfig.Connection.CreateTeam(t);
+                GlobalConfig.Connection.CreateTeam(t);
 
-                // TODO - if we aren't closing this form after creation - reset the form
+                callingForm.TeamComplete(t);
+                this.Close();
 
                 MessageBox.Show("Team was created", "noice", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 
-            } else
+            }
+            else
             {
                 MessageBox.Show("You must enter team name to proceed!", "Please enter team name!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }

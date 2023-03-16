@@ -294,11 +294,17 @@
             Margin = new Padding(6);
             Name = "CreateTeamForm";
             Text = "Create Team";
+           // Load += CreateTeamForm_Load;
             addNewMemberBox.ResumeLayout(false);
             addNewMemberBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
+
+        //private void CreateTeamForm_Load(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         #endregion
