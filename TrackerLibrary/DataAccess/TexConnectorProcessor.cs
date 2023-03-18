@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.Common;
+using System.Runtime.CompilerServices;
 using TrackerLibrary.Models;
 
 // *load text file
@@ -130,9 +131,17 @@ namespace TrackerLibrary.DataAccess.TextHelpers
                     team.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First() );
                 }
 
+
+                //add team to output
+                output.Add(team);
             }
 
             return output;
+
+        }
+
+        public static List<TournamentModel> ConvertToTournamentModels (this List<string> lines)
+        {
 
         }
 

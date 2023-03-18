@@ -10,6 +10,8 @@ namespace TrackerLibrary.DataAccess
         private const string PrizesFile = "PrizeModels.csv"; //private const - value will never chnage
         private const string PeopleFile = "PersonModels.csv";
         private const string TeamFile = "TeamModels.csv";
+        private const string TournamentFile = "TournamentModels.csv";
+
 
         public PersonModel CreatePerson(PersonModel model)
         {
@@ -84,6 +86,11 @@ namespace TrackerLibrary.DataAccess
 
         }
 
+        public TournamentModel CreateTournament(TournamentModel model)
+        {
+            List<TournamentModel> tournaments = TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels();
+        }
+
         public List<PersonModel> GetPerson_All()
         {
             return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
@@ -91,7 +98,8 @@ namespace TrackerLibrary.DataAccess
 
         public List<TeamModel> GetTeam_All()
         {
-            throw new NotImplementedException();
+            // Load file and convert it to model
+            return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
         }
     }
 }
