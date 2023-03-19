@@ -136,6 +136,7 @@ namespace TrackerUI
             tm.EnteredTeams = selectedTeams;
 
             // create and wire up our matchups
+            // TODO - matchups
 
 
             // Create tournament entry an make it active
