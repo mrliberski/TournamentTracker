@@ -121,9 +121,9 @@ namespace TrackerUI
 
             if (!feeAcceptable)
             {
-                MessageBox.Show("you need to enter a valid entry fee", 
-                    "Invalid fee", 
-                    MessageBoxButtons.OK, 
+                MessageBox.Show("you need to enter a valid entry fee",
+                    "Invalid fee",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return; // this stops exzec
             }
@@ -149,6 +149,11 @@ namespace TrackerUI
             GlobalConfig.Connection.CreateTournament(tm);
 
 
+
+        }
+
+        private void selectTeamDropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

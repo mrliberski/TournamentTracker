@@ -112,6 +112,7 @@ namespace TrackerLibrary.DataAccess
                     //supply id for sql query
                     var p = new DynamicParameters();
                     p.Add("@TeamId", team.Id);
+
                     // loop through
                     team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", p, commandType: CommandType.StoredProcedure).ToList();
                 }
@@ -180,7 +181,7 @@ namespace TrackerLibrary.DataAccess
 
             // loop through rounds
             // loop through matchups inside
-            // sava the matchup
+            // save the matchup
             // loop through entries and save them
 
             foreach (List<MatchupModel> round in model.Rounds)
