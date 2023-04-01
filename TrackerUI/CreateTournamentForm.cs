@@ -17,9 +17,9 @@ namespace TrackerUI
         /// <summary>
         /// Pull the list of available teams
         /// </summary>
-        readonly List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
-        readonly List<TeamModel> selectedTeams = new();
-        readonly List<PrizeModel> selectedPrizes = new();
+        List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
+        List<TeamModel> selectedTeams = new List<TeamModel>();
+        List<PrizeModel> selectedPrizes = new List<PrizeModel>();
 
         public CreateTournamentForm()
         {
@@ -60,18 +60,12 @@ namespace TrackerUI
             // Call create Prize form
             CreatePrizeForm frm = new CreatePrizeForm(this);
             frm.Show();
-
-            // get back from form a prizeModel
-
-
-            // take prize model, put into list of selected prizes
         }
 
         public void PrizeComplete(PrizeModel model)
         {
-            // get back from form a prizeModel
+            // gets info back from form a prizeModel
             // take prize model, put into list of selected prizes
-
             selectedPrizes.Add(model);
             WireUpLists();
         }
@@ -109,7 +103,6 @@ namespace TrackerUI
                 selectedPrizes.Remove(p);
 
                 WireUpLists();
-
             }
         }
 
