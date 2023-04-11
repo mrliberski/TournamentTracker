@@ -139,10 +139,9 @@ namespace TrackerUI
             // Create tournament entry an make it active
             // Create all of prizes entries 
             // create team entries
+
             GlobalConfig.Connection.CreateTournament(tm);
-
-
-
+           
         }
 
         private void selectTeamDropdown_SelectedIndexChanged(object sender, EventArgs e)
